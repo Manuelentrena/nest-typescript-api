@@ -15,7 +15,7 @@ export class TaskCreate {
     name: string,
     date: Date,
     createdAt: Date,
-  ): Promise<void> {
+  ): Promise<Task | null> {
     const task = new Task(
       new TaskId(id),
       new TaskName(name),

@@ -52,12 +52,14 @@ export class TaskController {
     return res
       .status(201)
       .json(
-        await this.taskCreate.run(
-          body.id,
-          body.name,
-          new Date(body.date),
-          new Date(),
-        ),
+        (
+          await this.taskCreate.run(
+            body.id,
+            body.name,
+            new Date(body.date),
+            new Date(),
+          )
+        ).toPlainObject(),
       );
   }
 
