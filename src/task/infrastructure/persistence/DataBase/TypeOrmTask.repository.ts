@@ -28,7 +28,7 @@ export class TypeOrmTaskRepository implements TaskRepository {
   async getAll(): Promise<Task[]> {
     const tasks = await this.repository.find();
 
-    return tasks.map((u) => this.mapToDomain(u));
+    return tasks.map((t) => this.mapToDomain(t));
   }
 
   async getOneById(id: TaskId): Promise<Task | null> {
@@ -43,13 +43,15 @@ export class TypeOrmTaskRepository implements TaskRepository {
     return this.mapToDomain(task);
   }
 
-  async create(task: Task): Promise<void> {
-    await this.repository.save({
+  async create(task: Task): Promise<Task | null> {
+    const newTask = await this.repository.save({
       id: task.id.value,
       name: task.name.value,
       date: task.date.value,
       createdAt: task.createdAt.value,
     });
+
+    return this.mapToDomain(newTask);
   }
 
   async edit(task: Task): Promise<Task | null> {

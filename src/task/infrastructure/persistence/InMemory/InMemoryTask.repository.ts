@@ -9,8 +9,9 @@ import { TaskId } from '../../../domain/value-objects';
 export class InMemoryTaskRepository implements TaskRepository {
   private tasks: Task[] = [];
 
-  async create(task: Task): Promise<void> {
+  async create(task: Task): Promise<Task | null> {
     this.tasks.push(task);
+    return task;
   }
 
   async getAll(): Promise<Task[]> {
