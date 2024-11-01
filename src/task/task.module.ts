@@ -1,14 +1,49 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { LoggerMiddleware } from './logger/logger.middleware';
-import { TaskController } from './task.controller';
-import { TaskService } from './task.service';
+import { Module } from '@nestjs/common';
+import { TaskCreate } from './application/TaskCreate/TaskCreate';
+import { TaskDelete } from './application/TaskDelete/TaskDelete';
+import { TaskEdit } from './application/TaskEdit/TaskEdit';
+import { TaskGetAll } from './application/TaskGetAll/TaskGetAll';
+import { TaskGetOneById } from './application/TaskGetOneById/TaskGetOneById';
+import { TaskController } from './infrastructure/http/controllers/task.controller';
+import { InMemoryTaskRepository } from './infrastructure/persistence/InMemory/InMemoryTaskRepository';
 
 @Module({
   controllers: [TaskController],
-  providers: [TaskService],
+  providers: [
+    {
+      provide: 'TaskRepository',
+      useClass: InMemoryTaskRepository,
+    },
+    {
+      provide: 'TaskGetAll',
+      useFactory: (repository: InMemoryTaskRepository) =>
+        new TaskGetAll(repository),
+      inject: ['TaskRepository'],
+    },
+    {
+      provide: 'TaskGetOneById',
+      useFactory: (repository: InMemoryTaskRepository) =>
+        new TaskGetOneById(repository),
+      inject: ['TaskRepository'],
+    },
+    {
+      provide: 'TaskCreate',
+      useFactory: (repository: InMemoryTaskRepository) =>
+        new TaskCreate(repository),
+      inject: ['TaskRepository'],
+    },
+    {
+      provide: 'TaskEdit',
+      useFactory: (repository: InMemoryTaskRepository) =>
+        new TaskEdit(repository),
+      inject: ['TaskRepository'],
+    },
+    {
+      provide: 'TaskDelete',
+      useFactory: (repository: InMemoryTaskRepository) =>
+        new TaskDelete(repository),
+      inject: ['TaskRepository'],
+    },
+  ],
 })
-export class TaskModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('tasks');
-  }
-}
+export class TaskModule {}
