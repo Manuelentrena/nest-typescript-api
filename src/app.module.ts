@@ -5,7 +5,6 @@ import { TaskModule } from './task/task.module';
 
 @Module({
   imports: [
-    TaskModule,
     TypeOrmModule.forRoot({
       type: envConfig.DB_TYPE as 'postgres',
       host: envConfig.DB_HOST,
@@ -16,6 +15,7 @@ import { TaskModule } from './task/task.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: envConfig.DB_SYNCHRONIZE,
     }),
+    TaskModule,
   ],
 })
 export class AppModule {}
