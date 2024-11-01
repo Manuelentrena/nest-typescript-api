@@ -5,7 +5,7 @@ import { TaskEdit } from './application/TaskEdit/TaskEdit';
 import { TaskGetAll } from './application/TaskGetAll/TaskGetAll';
 import { TaskGetOneById } from './application/TaskGetOneById/TaskGetOneById';
 import { TaskController } from './infrastructure/http/controllers/task.controller';
-import { InMemoryTaskRepository } from './infrastructure/persistence/InMemory/InMemoryTaskRepository';
+import { InMemoryTaskRepository } from './infrastructure/persistence/InMemory/InMemoryTask.repository';
 
 @Module({
   controllers: [TaskController],
