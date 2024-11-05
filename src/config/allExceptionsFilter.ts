@@ -7,6 +7,8 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { TaskNotFoundError } from 'src/task/domain/errors/TaskNotFoundError';
+import { UserNotFoundError } from 'src/user/domain/errors/UserNotFoundError';
+import { UserPasswordInvalidError } from 'src/user/domain/errors/UserPasswordInvalidError';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -27,6 +29,12 @@ export class AllExceptionsFilter implements ExceptionFilter {
         message = (responseBody as any).message || message;
       }
     } else if (exception instanceof TaskNotFoundError) {
+      status = HttpStatus.NOT_FOUND;
+      message = exception.message;
+    } else if (exception instanceof UserNotFoundError) {
+      status = HttpStatus.NOT_FOUND;
+      message = exception.message;
+    } else if (exception instanceof UserPasswordInvalidError) {
       status = HttpStatus.NOT_FOUND;
       message = exception.message;
     }
