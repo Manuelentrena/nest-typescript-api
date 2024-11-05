@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { envConfig } from './config/env';
 import { TaskModule } from './task/task.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TaskModule } from './task/task.module';
       synchronize: envConfig.DB_SYNCHRONIZE,
     }),
     TaskModule,
+    UserModule,
   ],
 })
 export class AppModule {}
