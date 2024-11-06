@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserLogin } from './application/AuthLogin/AuthLogin';
-import { UserLogout } from './application/AuthLogout/AuthLogout';
-import { UserRegister } from './application/AuthRegister/AuthRegister';
-import { UserResetPassword } from './application/AuthResetPassword/AuthResetPassword';
+import { AuthLogin } from './application/AuthLogin/AuthLogin';
+import { AuthLogout } from './application/AuthLogout/AuthLogout';
+import { AuthRegister } from './application/AuthRegister/AuthRegister';
+import { AuthResetPassword } from './application/AuthResetPassword/AuthResetPassword';
 import { UserController } from './infrastructure/http/controllers/auth.controller';
+import { TypeOrmAuthRepository } from './infrastructure/persistence/DataBase/TypeOrmAuth.repository';
 import { TypeOrmUserEntity } from './infrastructure/persistence/DataBase/TypeOrmUser.entity';
-import { TypeOrmUserRepository } from './infrastructure/persistence/DataBase/TypeOrmUser.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmUserEntity])],
@@ -14,32 +14,32 @@ import { TypeOrmUserRepository } from './infrastructure/persistence/DataBase/Typ
   providers: [
     {
       provide: 'UserRepository',
-      useClass: TypeOrmUserRepository,
+      useClass: TypeOrmAuthRepository,
     },
     {
-      provide: 'UserRegister',
-      useFactory: (repository: TypeOrmUserRepository) =>
-        new UserRegister(repository),
+      provide: 'AuthRegister',
+      useFactory: (repository: TypeOrmAuthRepository) =>
+        new AuthRegister(repository),
       inject: ['UserRepository'],
     },
     {
-      provide: 'UserLogin',
-      useFactory: (repository: TypeOrmUserRepository) =>
-        new UserLogin(repository),
+      provide: 'AuthLogin',
+      useFactory: (repository: TypeOrmAuthRepository) =>
+        new AuthLogin(repository),
       inject: ['UserRepository'],
     },
     {
-      provide: 'UserResetPassword',
-      useFactory: (repository: TypeOrmUserRepository) =>
-        new UserResetPassword(repository),
+      provide: 'AuthResetPassword',
+      useFactory: (repository: TypeOrmAuthRepository) =>
+        new AuthResetPassword(repository),
       inject: ['UserRepository'],
     },
     {
-      provide: 'UserLogout',
-      useFactory: (repository: TypeOrmUserRepository) =>
-        new UserLogout(repository),
+      provide: 'AuthLogout',
+      useFactory: (repository: TypeOrmAuthRepository) =>
+        new AuthLogout(repository),
       inject: ['UserRepository'],
     },
   ],
 })
-export class UserModule {}
+export class AuthModule {}

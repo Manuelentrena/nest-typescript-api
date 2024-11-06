@@ -1,8 +1,8 @@
 import { UserId } from 'src/auth/domain/value-objects';
-import { UserRepository } from '../../domain/repositories/AuthRepository';
+import { AuthRepository } from '../../domain/repositories/AuthRepository';
 
-export class UserLogout {
-  constructor(private readonly repository: UserRepository) {}
+export class AuthLogout {
+  constructor(private readonly repository: AuthRepository) {}
 
   async run(userId: string): Promise<void> {
     return this.repository.logout(new UserId(userId));

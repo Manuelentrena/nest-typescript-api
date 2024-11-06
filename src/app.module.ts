@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 import { envConfig } from './config/env';
 import { TaskModule } from './task/task.module';
 
@@ -17,7 +17,7 @@ import { TaskModule } from './task/task.module';
       synchronize: envConfig.DB_SYNCHRONIZE,
     }),
     TaskModule,
-    UserModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

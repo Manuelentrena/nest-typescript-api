@@ -4,11 +4,11 @@ import {
   UserPassword,
 } from 'src/auth/domain/value-objects';
 import { User } from '../../domain/entities/User';
-import { UserRepository } from '../../domain/repositories/AuthRepository';
+import { AuthRepository } from '../../domain/repositories/AuthRepository';
 import { UserId } from '../../domain/value-objects/UserId';
 
-export class UserRegister {
-  constructor(private readonly repository: UserRepository) {}
+export class AuthRegister {
+  constructor(private readonly repository: AuthRepository) {}
 
   async run(
     id: string,

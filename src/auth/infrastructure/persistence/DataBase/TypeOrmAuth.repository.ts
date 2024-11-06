@@ -8,11 +8,11 @@ import {
 } from 'src/auth/domain/value-objects';
 import { Repository } from 'typeorm';
 import { User } from '../../../domain/entities/User';
-import { UserRepository } from '../../../domain/repositories/AuthRepository';
+import { AuthRepository } from '../../../domain/repositories/AuthRepository';
 import { UserId } from '../../../domain/value-objects/UserId';
 import { TypeOrmUserEntity } from './TypeOrmUser.entity';
 
-export class TypeOrmUserRepository implements UserRepository {
+export class TypeOrmAuthRepository implements AuthRepository {
   constructor(
     @InjectRepository(TypeOrmUserEntity)
     private readonly repository: Repository<TypeOrmUserEntity>,
