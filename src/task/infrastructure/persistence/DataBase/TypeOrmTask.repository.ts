@@ -1,4 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserId } from 'src/user/domain/value-objects';
 import { Repository } from 'typeorm';
 import { Task } from '../../../domain/entities/Task';
 import { TaskRepository } from '../../../domain/repositories/TaskRepository';
@@ -22,12 +23,12 @@ export class TypeOrmTaskRepository implements TaskRepository {
       new TaskName(t.name),
       new TaskDate(t.date),
       new TaskCreatedAt(t.createdAt),
+      new UserId(t.userId),
     );
   }
 
-  async getAll(): Promise<Task[]> {
-    const tasks = await this.repository.find();
-
+  async getAllByIdUser(id: UserId): Promise<Task[]> {
+    const tasks = await this.repository.find({ where: { userId: id.value } });
     return tasks.map((t) => this.mapToDomain(t));
   }
 
@@ -49,6 +50,7 @@ export class TypeOrmTaskRepository implements TaskRepository {
       name: task.name.value,
       date: task.date.value,
       createdAt: task.createdAt.value,
+      userId: task.userId.value,
     });
 
     return this.mapToDomain(newTask);
@@ -59,6 +61,7 @@ export class TypeOrmTaskRepository implements TaskRepository {
       name: task.name.value,
       date: task.date.value,
       createdAt: task.createdAt.value,
+      userId: task.userId.value,
     });
 
     return task;

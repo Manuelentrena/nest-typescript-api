@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskCreate } from './application/TaskCreate/TaskCreate';
 import { TaskDelete } from './application/TaskDelete/TaskDelete';
 import { TaskEdit } from './application/TaskEdit/TaskEdit';
-import { TaskGetAll } from './application/TaskGetAll/TaskGetAll';
+import { TaskGetAllByUserId } from './application/TaskGetAllByUserId/TaskGetAllByUserId';
 import { TaskGetOneById } from './application/TaskGetOneById/TaskGetOneById';
 import { TaskController } from './infrastructure/http/controllers/task.controller';
 import { TypeOrmTaskEntity } from './infrastructure/persistence/DataBase/TypeOrmTask.entity';
@@ -18,9 +18,9 @@ import { TypeOrmTaskRepository } from './infrastructure/persistence/DataBase/Typ
       useClass: TypeOrmTaskRepository,
     },
     {
-      provide: 'TaskGetAll',
+      provide: 'TaskGetAllByUserId',
       useFactory: (repository: TypeOrmTaskRepository) =>
-        new TaskGetAll(repository),
+        new TaskGetAllByUserId(repository),
       inject: ['TaskRepository'],
     },
     {

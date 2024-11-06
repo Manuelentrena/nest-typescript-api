@@ -19,7 +19,7 @@ import { UserResetPassword } from '../../../application/UserResetPassword/UserRe
 import { UserLoginDto } from '../dto/login-user.dto';
 import { UserRegisterDto } from '../dto/register-user.dto';
 import { UserResetPasswordDto } from '../dto/reset-password-user.dto';
-import { FindOneParams } from '../pipe/uuid-user.pipe';
+import { FindOneUserParams } from '../pipe/uuid-user.pipe';
 
 @Controller('/auth')
 export class UserController {
@@ -63,7 +63,7 @@ export class UserController {
 
   @Post('/logout')
   @UsePipes(new ValidationPipe({ transform: true }))
-  async logout(@Param() params: FindOneParams, @Res() res: Response) {
+  async logout(@Param() params: FindOneUserParams, @Res() res: Response) {
     return res
       .status(201)
       .json(`User was logout: ${await this.userLogout.run(params.id)}`);
@@ -71,7 +71,7 @@ export class UserController {
 
   @Get('/:id')
   @UsePipes(new ValidationPipe({ transform: true }))
-  async findById(@Param() params: FindOneParams, @Res() res: Response) {
+  async findById(@Param() params: FindOneUserParams, @Res() res: Response) {
     return res
       .status(200)
       .json((await this.userFindById.run(params.id)).toPlainObject());
@@ -80,7 +80,7 @@ export class UserController {
   @Patch('/reset-password/:id')
   @UsePipes(new ValidationPipe({ transform: true }))
   async resetPassword(
-    @Param() params: FindOneParams,
+    @Param() params: FindOneUserParams,
     @Body() body: UserResetPasswordDto,
     @Res() res: Response,
   ) {

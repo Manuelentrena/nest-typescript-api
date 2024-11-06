@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { TypeOrmTaskEntity } from 'src/task/infrastructure/persistence/DataBase/TypeOrmTask.entity';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity('users')
 export class TypeOrmUserEntity {
@@ -13,4 +14,7 @@ export class TypeOrmUserEntity {
 
   @Column({ unique: true })
   email: string;
+
+  @OneToMany(() => TypeOrmTaskEntity, (task) => task.user)
+  tasks: TypeOrmTaskEntity[];
 }

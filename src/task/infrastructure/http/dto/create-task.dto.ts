@@ -17,4 +17,7 @@ export class CreateTaskDto {
 
   @IsDateString()
   date: Date;
+
+  @IsUUID()
+  userId: string;
 }

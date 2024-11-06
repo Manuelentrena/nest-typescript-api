@@ -1,4 +1,10 @@
-import { IsDateString, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsDateString,
+  IsString,
+  IsUUID,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class UpdateTaskDto {
   @IsString()
@@ -8,4 +14,7 @@ export class UpdateTaskDto {
 
   @IsDateString()
   date: Date;
+
+  @IsUUID()
+  userId: string;
 }

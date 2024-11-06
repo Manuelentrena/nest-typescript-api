@@ -1,3 +1,4 @@
+import { UserId } from 'src/user/domain/value-objects';
 import { Task } from '../../domain/entities/Task';
 import { TaskRepository } from '../../domain/repositories/TaskRepository';
 import {
@@ -15,12 +16,14 @@ export class TaskEdit {
     name: string,
     date: Date,
     createdAt: Date,
+    userId: string,
   ): Promise<Task | null> {
     const user = new Task(
       new TaskId(id),
       new TaskName(name),
       new TaskDate(date),
       new TaskCreatedAt(createdAt),
+      new UserId(userId),
     );
 
     return this.repository.edit(user);
