@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmUserEntity } from '../shared/database/TypeOrmUser.entity';
 import { AuthLogin } from './application/AuthLogin/AuthLogin';
 import { AuthLogout } from './application/AuthLogout/AuthLogout';
 import { AuthRegister } from './application/AuthRegister/AuthRegister';
 import { AuthResetPassword } from './application/AuthResetPassword/AuthResetPassword';
 import { UserController } from './infrastructure/http/controllers/auth.controller';
 import { TypeOrmAuthRepository } from './infrastructure/persistence/DataBase/TypeOrmAuth.repository';
-import { TypeOrmUserEntity } from './infrastructure/persistence/DataBase/TypeOrmUser.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmUserEntity])],

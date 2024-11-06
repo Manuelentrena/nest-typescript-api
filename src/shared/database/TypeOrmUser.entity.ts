@@ -1,4 +1,4 @@
-import { TypeOrmTaskEntity } from 'src/task/infrastructure/persistence/DataBase/TypeOrmTask.entity';
+import { TypeOrmTaskEntity } from 'src/shared/database/TypeOrmTask.entity';
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity('users')

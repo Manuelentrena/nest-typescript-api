@@ -7,10 +7,10 @@ import {
   UserPassword,
 } from 'src/auth/domain/value-objects';
 import { Repository } from 'typeorm';
+import { TypeOrmUserEntity } from '../../../../shared/database/TypeOrmUser.entity';
 import { User } from '../../../domain/entities/User';
 import { AuthRepository } from '../../../domain/repositories/AuthRepository';
 import { UserId } from '../../../domain/value-objects/UserId';
-import { TypeOrmUserEntity } from './TypeOrmUser.entity';
 
 export class TypeOrmAuthRepository implements AuthRepository {
   constructor(

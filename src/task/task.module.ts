@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmTaskEntity } from '../shared/database/TypeOrmTask.entity';
 import { TaskCreate } from './application/TaskCreate/TaskCreate';
 import { TaskDelete } from './application/TaskDelete/TaskDelete';
 import { TaskEdit } from './application/TaskEdit/TaskEdit';
 import { TaskGetAllByUserId } from './application/TaskGetAllByUserId/TaskGetAllByUserId';
 import { TaskGetOneById } from './application/TaskGetOneById/TaskGetOneById';
 import { TaskController } from './infrastructure/http/controllers/task.controller';
-import { TypeOrmTaskEntity } from './infrastructure/persistence/DataBase/TypeOrmTask.entity';
 import { TypeOrmTaskRepository } from './infrastructure/persistence/DataBase/TypeOrmTask.repository';
 
 @Module({
