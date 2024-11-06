@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './auth/auth.module';
 import { envConfig } from './config/env';
 import { TaskModule } from './task/task.module';
-import { UserModule } from './user/user.module';
 
 @Module({
   imports: [

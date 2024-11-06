@@ -1,4 +1,4 @@
-import { TypeOrmUserEntity } from 'src/user/infrastructure/persistence/DataBase/TypeOrmUser.entity';
+import { TypeOrmUserEntity } from 'src/auth/infrastructure/persistence/DataBase/TypeOrmUser.entity';
 import {
   Column,
   CreateDateColumn,

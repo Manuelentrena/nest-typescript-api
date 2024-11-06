@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  Get,
   Inject,
   Param,
   Patch,
@@ -11,14 +10,13 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { UserFindById } from '../../../application/UserFindById/UserFindById';
-import { UserLogin } from '../../../application/UserLogin/UserLogin';
-import { UserLogout } from '../../../application/UserLogout/UserLogout';
-import { UserRegister } from '../../../application/UserRegister/UserRegister';
-import { UserResetPassword } from '../../../application/UserResetPassword/UserResetPassword';
-import { UserLoginDto } from '../dto/login-user.dto';
-import { UserRegisterDto } from '../dto/register-user.dto';
-import { UserResetPasswordDto } from '../dto/reset-password-user.dto';
+import { UserLogin } from '../../../application/AuthLogin/AuthLogin';
+import { UserLogout } from '../../../application/AuthLogout/AuthLogout';
+import { UserRegister } from '../../../application/AuthRegister/AuthRegister';
+import { UserResetPassword } from '../../../application/AuthResetPassword/AuthResetPassword';
+import { UserLoginDto } from '../dto/login-auth.dto';
+import { UserRegisterDto } from '../dto/register-auth.dto';
+import { UserResetPasswordDto } from '../dto/reset-password-auth.dto';
 import { FindOneUserParams } from '../pipe/uuid-user.pipe';
 
 @Controller('/auth')
@@ -27,7 +25,6 @@ export class UserController {
     @Inject('UserLogin') private readonly userLogin: UserLogin,
     @Inject('UserRegister') private readonly userRegister: UserRegister,
     @Inject('UserLogout') private readonly userLogout: UserLogout,
-    @Inject('UserFindById') private readonly userFindById: UserFindById,
     @Inject('UserResetPassword')
     private readonly userResetPassword: UserResetPassword,
   ) {}
@@ -69,13 +66,25 @@ export class UserController {
       .json(`User was logout: ${await this.userLogout.run(params.id)}`);
   }
 
-  @Get('/:id')
-  @UsePipes(new ValidationPipe({ transform: true }))
-  async findById(@Param() params: FindOneUserParams, @Res() res: Response) {
-    return res
-      .status(200)
-      .json((await this.userFindById.run(params.id)).toPlainObject());
-  }
+  // @Get('/:id')
+  // @UsePipes(new ValidationPipe({ transform: true }))
+  // async findById(@Param() params: FindOneUserParams, @Res() res: Response) {
+  //   return res
+  //     .status(200)
+  //     .json((await this.userFindById.run(params.id)).toPlainObject());
+  // }
+
+  // @Get('/user/:id/tasks')
+  // async getAllTasksByUser(
+  //   @Param() params: FindOneUserParams,
+  //   @Res() res: Response,
+  // ) {
+  //   return res.status(200).json({
+  //     tasks: (await this.taskGetAllByUserId.run(params.id)).map((task) =>
+  //       task.toPlainObject(),
+  //     ),
+  //   });
+  // }
 
   @Patch('/reset-password/:id')
   @UsePipes(new ValidationPipe({ transform: true }))

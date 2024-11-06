@@ -1,4 +1,4 @@
-import { UserId } from 'src/user/domain/value-objects';
+import { UserId } from 'src/auth/domain/value-objects';
 import { TaskCreatedAt, TaskDate, TaskId, TaskName } from '../value-objects';
 
 export class Task {

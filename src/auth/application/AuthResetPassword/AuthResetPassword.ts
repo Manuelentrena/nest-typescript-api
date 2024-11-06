@@ -1,5 +1,5 @@
 import { User } from '../../domain/entities/User';
-import { UserRepository } from '../../domain/repositories/UserRepository';
+import { UserRepository } from '../../domain/repositories/AuthRepository';
 import { UserId } from '../../domain/value-objects/UserId';
 
 export class UserResetPassword {

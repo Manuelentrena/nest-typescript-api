@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserId } from 'src/user/domain/value-objects';
+import { UserId } from 'src/auth/domain/value-objects';
 import { Repository } from 'typeorm';
 import { Task } from '../../../domain/entities/Task';
 import { TaskRepository } from '../../../domain/repositories/TaskRepository';

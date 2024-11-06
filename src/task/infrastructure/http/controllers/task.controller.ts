@@ -12,7 +12,6 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { FindOneUserParams } from 'src/user/infrastructure/http/pipe/uuid-user.pipe';
 import { TaskCreate } from '../../../application/TaskCreate/TaskCreate';
 import { TaskDelete } from '../../../application/TaskDelete/TaskDelete';
 import { TaskEdit } from '../../../application/TaskEdit/TaskEdit';
@@ -32,18 +31,6 @@ export class TaskController {
     @Inject('TaskEdit') private readonly taskEdit: TaskEdit,
     @Inject('TaskDelete') private readonly taskDelete: TaskDelete,
   ) {}
-
-  @Get()
-  async getAllTasksByUser(
-    @Param() params: FindOneUserParams,
-    @Res() res: Response,
-  ) {
-    return res.status(200).json({
-      tasks: (await this.taskGetAllByUserId.run(params.id)).map((task) =>
-        task.toPlainObject(),
-      ),
-    });
-  }
 
   @Get('/:id')
   @UsePipes(new ValidationPipe({ transform: true }))
