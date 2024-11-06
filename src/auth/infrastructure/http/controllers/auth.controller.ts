@@ -20,7 +20,7 @@ import { AuthResetPasswordDto } from '../dto/reset-password-auth.dto';
 import { FindOneUserParams } from '../pipe/uuid-user.pipe';
 
 @Controller('/auth')
-export class UserController {
+export class AuthController {
   constructor(
     @Inject('AuthLogin') private readonly authLogin: AuthLogin,
     @Inject('AuthRegister') private readonly authRegister: AuthRegister,

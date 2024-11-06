@@ -5,40 +5,40 @@ import { AuthLogin } from './application/AuthLogin/AuthLogin';
 import { AuthLogout } from './application/AuthLogout/AuthLogout';
 import { AuthRegister } from './application/AuthRegister/AuthRegister';
 import { AuthResetPassword } from './application/AuthResetPassword/AuthResetPassword';
-import { UserController } from './infrastructure/http/controllers/auth.controller';
+import { AuthController } from './infrastructure/http/controllers/auth.controller';
 import { TypeOrmAuthRepository } from './infrastructure/persistence/DataBase/TypeOrmAuth.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmUserEntity])],
-  controllers: [UserController],
+  controllers: [AuthController],
   providers: [
     {
-      provide: 'UserRepository',
+      provide: 'AuthRepository',
       useClass: TypeOrmAuthRepository,
     },
     {
       provide: 'AuthRegister',
       useFactory: (repository: TypeOrmAuthRepository) =>
         new AuthRegister(repository),
-      inject: ['UserRepository'],
+      inject: ['AuthRepository'],
     },
     {
       provide: 'AuthLogin',
       useFactory: (repository: TypeOrmAuthRepository) =>
         new AuthLogin(repository),
-      inject: ['UserRepository'],
+      inject: ['AuthRepository'],
     },
     {
       provide: 'AuthResetPassword',
       useFactory: (repository: TypeOrmAuthRepository) =>
         new AuthResetPassword(repository),
-      inject: ['UserRepository'],
+      inject: ['AuthRepository'],
     },
     {
       provide: 'AuthLogout',
       useFactory: (repository: TypeOrmAuthRepository) =>
         new AuthLogout(repository),
-      inject: ['UserRepository'],
+      inject: ['AuthRepository'],
     },
   ],
 })
