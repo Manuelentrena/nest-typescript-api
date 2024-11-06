@@ -1,4 +1,4 @@
-import { UserId } from 'src/auth/domain/value-objects';
+import { UserId } from 'src/user/domain/value-objects';
 import { Task } from '../entities/Task';
 import { TaskId } from '../value-objects';
 

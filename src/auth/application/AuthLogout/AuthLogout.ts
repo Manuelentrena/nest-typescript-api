@@ -1,5 +1,5 @@
-import { UserId } from 'src/auth/domain/value-objects';
-import { AuthRepository } from '../../domain/repositories/AuthRepository';
+import { AuthRepository } from 'src/auth/domain/repositories/AuthRepository';
+import { UserId } from 'src/user/domain/value-objects';
 
 export class AuthLogout {
   constructor(private readonly repository: AuthRepository) {}

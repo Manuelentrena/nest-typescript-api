@@ -6,9 +6,9 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { UserNotFoundError } from 'src/auth/domain/errors/UserNotFoundError';
-import { UserPasswordInvalidError } from 'src/auth/domain/errors/UserPasswordInvalidError';
 import { TaskNotFoundError } from 'src/task/domain/errors/TaskNotFoundError';
+import { UserNotFoundError } from 'src/user/domain/errors/UserNotFoundError';
+import { UserPasswordInvalidError } from 'src/user/domain/errors/UserPasswordInvalidError';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {

@@ -1,6 +1,6 @@
-import { User } from '../../domain/entities/User';
-import { AuthRepository } from '../../domain/repositories/AuthRepository';
-import { UserId } from '../../domain/value-objects/UserId';
+import { AuthRepository } from 'src/auth/domain/repositories/AuthRepository';
+import { User } from 'src/user/domain/entities/User';
+import { UserId } from 'src/user/domain/value-objects/UserId';
 
 export class AuthResetPassword {
   constructor(private readonly repository: AuthRepository) {}

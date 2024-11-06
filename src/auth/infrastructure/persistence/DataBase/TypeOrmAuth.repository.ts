@@ -1,16 +1,16 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserNotFoundError } from 'src/auth/domain/errors/UserNotFoundError';
-import { UserPasswordInvalidError } from 'src/auth/domain/errors/UserPasswordInvalidError';
+import { AuthRepository } from 'src/auth/domain/repositories/AuthRepository';
+import { TypeOrmUserEntity } from 'src/shared/database/TypeOrmUser.entity';
+import { User } from 'src/user/domain/entities/User';
+import { UserNotFoundError } from 'src/user/domain/errors/UserNotFoundError';
+import { UserPasswordInvalidError } from 'src/user/domain/errors/UserPasswordInvalidError';
 import {
   UserEmail,
   UserName,
   UserPassword,
-} from 'src/auth/domain/value-objects';
+} from 'src/user/domain/value-objects';
+import { UserId } from 'src/user/domain/value-objects/UserId';
 import { Repository } from 'typeorm';
-import { TypeOrmUserEntity } from '../../../../shared/database/TypeOrmUser.entity';
-import { User } from '../../../domain/entities/User';
-import { AuthRepository } from '../../../domain/repositories/AuthRepository';
-import { UserId } from '../../../domain/value-objects/UserId';
 
 export class TypeOrmAuthRepository implements AuthRepository {
   constructor(

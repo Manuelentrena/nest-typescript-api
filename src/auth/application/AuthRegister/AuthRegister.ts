@@ -1,11 +1,11 @@
+import { AuthRepository } from 'src/auth/domain/repositories/AuthRepository';
+import { User } from 'src/user/domain/entities/User';
 import {
   UserEmail,
   UserName,
   UserPassword,
-} from 'src/auth/domain/value-objects';
-import { User } from '../../domain/entities/User';
-import { AuthRepository } from '../../domain/repositories/AuthRepository';
-import { UserId } from '../../domain/value-objects/UserId';
+} from 'src/user/domain/value-objects';
+import { UserId } from 'src/user/domain/value-objects/UserId';
 
 export class AuthRegister {
   constructor(private readonly repository: AuthRepository) {}

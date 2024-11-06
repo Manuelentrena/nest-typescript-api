@@ -1,4 +1,9 @@
-import { UserEmail, UserId, UserName, UserPassword } from '../value-objects';
+import {
+  UserEmail,
+  UserId,
+  UserName,
+  UserPassword,
+} from '../../../user/domain/value-objects';
 
 export class User {
   id: UserId;
