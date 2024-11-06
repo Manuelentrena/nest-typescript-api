@@ -1,6 +1,6 @@
 import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator';
 
-export class UserLoginDto {
+export class AuthLoginDto {
   @IsEmail({}, { message: 'Email must be a valid email address' })
   @MaxLength(255)
   useremail: string;

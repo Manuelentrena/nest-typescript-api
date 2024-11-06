@@ -10,33 +10,33 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { UserLogin } from '../../../application/AuthLogin/AuthLogin';
-import { UserLogout } from '../../../application/AuthLogout/AuthLogout';
-import { UserRegister } from '../../../application/AuthRegister/AuthRegister';
-import { UserResetPassword } from '../../../application/AuthResetPassword/AuthResetPassword';
-import { UserLoginDto } from '../dto/login-auth.dto';
-import { UserRegisterDto } from '../dto/register-auth.dto';
-import { UserResetPasswordDto } from '../dto/reset-password-auth.dto';
+import { AuthLogin } from '../../../application/AuthLogin/AuthLogin';
+import { AuthLogout } from '../../../application/AuthLogout/AuthLogout';
+import { AuthRegister } from '../../../application/AuthRegister/AuthRegister';
+import { AuthResetPassword } from '../../../application/AuthResetPassword/AuthResetPassword';
+import { AuthLoginDto } from '../dto/login-auth.dto';
+import { AuthRegisterDto } from '../dto/register-auth.dto';
+import { AuthResetPasswordDto } from '../dto/reset-password-auth.dto';
 import { FindOneUserParams } from '../pipe/uuid-user.pipe';
 
 @Controller('/auth')
 export class UserController {
   constructor(
-    @Inject('UserLogin') private readonly userLogin: UserLogin,
-    @Inject('UserRegister') private readonly userRegister: UserRegister,
-    @Inject('UserLogout') private readonly userLogout: UserLogout,
-    @Inject('UserResetPassword')
-    private readonly userResetPassword: UserResetPassword,
+    @Inject('AuthLogin') private readonly authLogin: AuthLogin,
+    @Inject('AuthRegister') private readonly authRegister: AuthRegister,
+    @Inject('AuthLogout') private readonly authLogout: AuthLogout,
+    @Inject('AuthResetPassword')
+    private readonly authResetPassword: AuthResetPassword,
   ) {}
 
   @Post('/register')
   @UsePipes(new ValidationPipe({ transform: true }))
-  async register(@Body() body: UserRegisterDto, @Res() res: Response) {
+  async register(@Body() body: AuthRegisterDto, @Res() res: Response) {
     return res
       .status(200)
       .json(
         (
-          await this.userRegister.run(
+          await this.authRegister.run(
             body.id,
             body.username,
             body.password,
@@ -48,12 +48,12 @@ export class UserController {
 
   @Post('/login')
   @UsePipes(new ValidationPipe({ transform: true }))
-  async login(@Body() body: UserLoginDto, @Res() res: Response) {
+  async login(@Body() body: AuthLoginDto, @Res() res: Response) {
     return res
       .status(200)
       .json(
         (
-          await this.userLogin.run(body.useremail, body.password)
+          await this.authLogin.run(body.useremail, body.password)
         ).toPlainObject(),
       );
   }
@@ -63,7 +63,7 @@ export class UserController {
   async logout(@Param() params: FindOneUserParams, @Res() res: Response) {
     return res
       .status(201)
-      .json(`User was logout: ${await this.userLogout.run(params.id)}`);
+      .json(`User was logout: ${await this.authLogout.run(params.id)}`);
   }
 
   // @Get('/:id')
@@ -90,14 +90,14 @@ export class UserController {
   @UsePipes(new ValidationPipe({ transform: true }))
   async resetPassword(
     @Param() params: FindOneUserParams,
-    @Body() body: UserResetPasswordDto,
+    @Body() body: AuthResetPasswordDto,
     @Res() res: Response,
   ) {
     return res
       .status(200)
       .json(
         (
-          await this.userResetPassword.run(params.id, body.newPassword)
+          await this.authResetPassword.run(params.id, body.newPassword)
         ).toPlainObject(),
       );
   }

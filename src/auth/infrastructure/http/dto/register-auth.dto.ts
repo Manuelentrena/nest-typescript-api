@@ -6,7 +6,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-export class UserRegisterDto {
+export class AuthRegisterDto {
   @IsUUID()
   id: string;
 
