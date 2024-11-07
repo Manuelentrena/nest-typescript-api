@@ -10,10 +10,10 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { AuthLogin } from '../../../application/AuthLogin/AuthLogin';
-import { AuthLogout } from '../../../application/AuthLogout/AuthLogout';
-import { AuthRegister } from '../../../application/AuthRegister/AuthRegister';
-import { AuthResetPassword } from '../../../application/AuthResetPassword/AuthResetPassword';
+import { AuthLogin } from '../../../application/AuthLogin/AuthLogin.service';
+import { AuthLogout } from '../../../application/AuthLogout/AuthLogout.service';
+import { AuthRegister } from '../../../application/AuthRegister/AuthRegister.service';
+import { AuthResetPassword } from '../../../application/AuthResetPassword/AuthResetPassword.service';
 import { AuthLoginDto } from '../dto/login-auth.dto';
 import { AuthRegisterDto } from '../dto/register-auth.dto';
 import { AuthResetPasswordDto } from '../dto/reset-password-auth.dto';

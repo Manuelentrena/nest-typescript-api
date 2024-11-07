@@ -3,10 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserFindByEmail } from 'src/user/application/UserFindByEmail/UserFindByEmail.service';
 import { UserModule } from 'src/user/user.module';
 import { TypeOrmUserEntity } from '../shared/database/TypeOrmUser.entity';
-import { AuthLogin } from './application/AuthLogin/AuthLogin';
-import { AuthLogout } from './application/AuthLogout/AuthLogout';
-import { AuthRegister } from './application/AuthRegister/AuthRegister';
-import { AuthResetPassword } from './application/AuthResetPassword/AuthResetPassword';
+import { AuthLogin } from './application/AuthLogin/AuthLogin.service';
+import { AuthLogout } from './application/AuthLogout/AuthLogout.service';
+import { AuthRegister } from './application/AuthRegister/AuthRegister.service';
+import { AuthResetPassword } from './application/AuthResetPassword/AuthResetPassword.service';
 import { AuthController } from './infrastructure/http/controllers/auth.controller';
 import { TypeOrmAuthRepository } from './infrastructure/persistence/DataBase/TypeOrmAuth.repository';
 

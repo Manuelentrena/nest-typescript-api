@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmTaskEntity } from '../shared/database/TypeOrmTask.entity';
-import { TaskCreate } from './application/TaskCreate/TaskCreate';
-import { TaskDelete } from './application/TaskDelete/TaskDelete';
-import { TaskEdit } from './application/TaskEdit/TaskEdit';
-import { TaskGetAllByUserId } from './application/TaskGetAllByUserId/TaskGetAllByUserId';
-import { TaskGetOneById } from './application/TaskGetOneById/TaskGetOneById';
+import { TaskCreate } from './application/TaskCreate/TaskCreate.service';
+import { TaskDelete } from './application/TaskDelete/TaskDelete.service';
+import { TaskEdit } from './application/TaskEdit/TaskEdit.service';
+import { TaskGetAllByUserId } from './application/TaskGetAllByUserId/TaskGetAllByUserId.service';
+import { TaskGetOneById } from './application/TaskGetOneById/TaskGetOneById.service';
 import { TaskController } from './infrastructure/http/controllers/task.controller';
 import { TypeOrmTaskRepository } from './infrastructure/persistence/DataBase/TypeOrmTask.repository';
 

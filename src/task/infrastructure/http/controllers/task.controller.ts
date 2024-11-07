@@ -12,11 +12,11 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { TaskCreate } from '../../../application/TaskCreate/TaskCreate';
-import { TaskDelete } from '../../../application/TaskDelete/TaskDelete';
-import { TaskEdit } from '../../../application/TaskEdit/TaskEdit';
-import { TaskGetAllByUserId } from '../../../application/TaskGetAllByUserId/TaskGetAllByUserId';
-import { TaskGetOneById } from '../../../application/TaskGetOneById/TaskGetOneById';
+import { TaskCreate } from '../../../application/TaskCreate/TaskCreate.service';
+import { TaskDelete } from '../../../application/TaskDelete/TaskDelete.service';
+import { TaskEdit } from '../../../application/TaskEdit/TaskEdit.service';
+import { TaskGetAllByUserId } from '../../../application/TaskGetAllByUserId/TaskGetAllByUserId.service';
+import { TaskGetOneById } from '../../../application/TaskGetOneById/TaskGetOneById.service';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
 import { FindOneTaskParams } from '../pipe/uuid-task.pipe';
