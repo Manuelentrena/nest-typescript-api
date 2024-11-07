@@ -3,7 +3,7 @@ import { TaskNotFoundError } from '../../domain/errors/TaskNotFoundError';
 import { TaskRepository } from '../../domain/repositories/TaskRepository';
 import { TaskId } from '../../domain/value-objects';
 
-export class TaskGetOneById {
+export class TaskFindById {
   constructor(private repository: TaskRepository) {}
 
   async run(id: string): Promise<Task> {

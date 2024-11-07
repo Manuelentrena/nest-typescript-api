@@ -4,8 +4,8 @@ import { TypeOrmTaskEntity } from '../shared/database/TypeOrmTask.entity';
 import { TaskCreate } from './application/TaskCreate/TaskCreate.service';
 import { TaskDelete } from './application/TaskDelete/TaskDelete.service';
 import { TaskEdit } from './application/TaskEdit/TaskEdit.service';
-import { TaskGetAllByUserId } from './application/TaskGetAllByUserId/TaskGetAllByUserId.service';
-import { TaskGetOneById } from './application/TaskGetOneById/TaskGetOneById.service';
+import { TaskFindById } from './application/TaskFindById/TaskFindById.service';
+import { TaskFindByUser } from './application/TaskFindByUser/TaskFindByUser.service';
 import { TaskController } from './infrastructure/http/controllers/task.controller';
 import { TypeOrmTaskRepository } from './infrastructure/persistence/DataBase/TypeOrmTask.repository';
 
@@ -18,15 +18,15 @@ import { TypeOrmTaskRepository } from './infrastructure/persistence/DataBase/Typ
       useClass: TypeOrmTaskRepository,
     },
     {
-      provide: 'TaskGetAllByUserId',
+      provide: 'TaskFindByUser',
       useFactory: (repository: TypeOrmTaskRepository) =>
-        new TaskGetAllByUserId(repository),
+        new TaskFindByUser(repository),
       inject: ['TaskRepository'],
     },
     {
-      provide: 'TaskGetOneById',
+      provide: 'TaskFindById',
       useFactory: (repository: TypeOrmTaskRepository) =>
-        new TaskGetOneById(repository),
+        new TaskFindById(repository),
       inject: ['TaskRepository'],
     },
     {

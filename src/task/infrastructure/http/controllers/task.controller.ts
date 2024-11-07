@@ -15,8 +15,8 @@ import { Response } from 'express';
 import { TaskCreate } from '../../../application/TaskCreate/TaskCreate.service';
 import { TaskDelete } from '../../../application/TaskDelete/TaskDelete.service';
 import { TaskEdit } from '../../../application/TaskEdit/TaskEdit.service';
-import { TaskGetAllByUserId } from '../../../application/TaskGetAllByUserId/TaskGetAllByUserId.service';
-import { TaskGetOneById } from '../../../application/TaskGetOneById/TaskGetOneById.service';
+import { TaskFindById } from '../../../application/TaskFindById/TaskFindById.service';
+import { TaskFindByUser } from '../../../application/TaskFindByUser/TaskFindByUser.service';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
 import { FindOneTaskParams } from '../pipe/uuid-task.pipe';
@@ -24,9 +24,9 @@ import { FindOneTaskParams } from '../pipe/uuid-task.pipe';
 @Controller('/tasks')
 export class TaskController {
   constructor(
-    @Inject('TaskGetAllByUserId')
-    private readonly taskGetAllByUserId: TaskGetAllByUserId,
-    @Inject('TaskGetOneById') private readonly taskGetOneById: TaskGetOneById,
+    @Inject('TaskFindByUser')
+    private readonly taskFindByUser: TaskFindByUser,
+    @Inject('TaskFindById') private readonly taskFindById: TaskFindById,
     @Inject('TaskCreate') private readonly taskCreate: TaskCreate,
     @Inject('TaskEdit') private readonly taskEdit: TaskEdit,
     @Inject('TaskDelete') private readonly taskDelete: TaskDelete,
@@ -37,7 +37,7 @@ export class TaskController {
   async getTask(@Param() params: FindOneTaskParams, @Res() res: Response) {
     return res
       .status(200)
-      .json((await this.taskGetOneById.run(params.id)).toPlainObject());
+      .json((await this.taskFindById.run(params.id)).toPlainObject());
   }
 
   @Post()
