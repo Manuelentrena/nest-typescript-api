@@ -1,4 +1,4 @@
-import { TaskRepository } from '../../domain/repositories/TaskRepository';
+import { TaskRepository } from '../../domain/contract/TaskRepository';
 import { TaskId } from '../../domain/value-objects';
 
 export class TaskDelete {

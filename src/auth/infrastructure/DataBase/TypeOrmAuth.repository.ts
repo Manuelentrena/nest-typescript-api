@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { AuthRepository } from 'src/auth/domain/repositories/AuthRepository';
+import { AuthRepository } from 'src/auth/domain/contract/AuthRepository';
 import { TypeOrmUserEntity } from 'src/shared/database/TypeOrmUser.entity';
 import { User } from 'src/user/domain/entities/User';
 import { UserPasswordInvalidError } from 'src/user/domain/errors/UserPasswordInvalidError';

@@ -1,15 +1,15 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserId } from 'src/user/domain/value-objects';
 import { Repository } from 'typeorm';
-import { TypeOrmTaskEntity } from '../../../../shared/database/TypeOrmTask.entity';
-import { Task } from '../../../domain/entities/Task';
-import { TaskRepository } from '../../../domain/repositories/TaskRepository';
+import { TypeOrmTaskEntity } from '../../../shared/database/TypeOrmTask.entity';
+import { TaskRepository } from '../../domain/contract/TaskRepository';
+import { Task } from '../../domain/entities/Task';
 import {
   TaskCreatedAt,
   TaskDate,
   TaskId,
   TaskName,
-} from '../../../domain/value-objects';
+} from '../../domain/value-objects';
 
 export class TypeOrmTaskRepository implements TaskRepository {
   constructor(

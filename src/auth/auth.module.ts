@@ -7,8 +7,8 @@ import { AuthLogin } from './application/AuthLogin/AuthLogin.service';
 import { AuthLogout } from './application/AuthLogout/AuthLogout.service';
 import { AuthRegister } from './application/AuthRegister/AuthRegister.service';
 import { AuthResetPassword } from './application/AuthResetPassword/AuthResetPassword.service';
+import { TypeOrmAuthRepository } from './infrastructure/DataBase/TypeOrmAuth.repository';
 import { AuthController } from './infrastructure/http/controllers/auth.controller';
-import { TypeOrmAuthRepository } from './infrastructure/persistence/DataBase/TypeOrmAuth.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmUserEntity]), UserModule],

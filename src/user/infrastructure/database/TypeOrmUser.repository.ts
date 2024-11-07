@@ -1,7 +1,7 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmUserEntity } from 'src/shared/database/TypeOrmUser.entity';
+import { UserRepository } from 'src/user/domain/contract/user.repository';
 import { User } from 'src/user/domain/entities/User';
-import { UserRepository } from 'src/user/domain/repositories/user.repository';
 import { UserName, UserPassword } from 'src/user/domain/value-objects';
 import { UserEmail } from 'src/user/domain/value-objects/UserEmail';
 import { UserId } from 'src/user/domain/value-objects/UserId';
@@ -37,13 +37,6 @@ export class TypeOrmUserRepository implements UserRepository {
       where: { email: email.value },
     });
     return user ? this.mapToDomain(user) : null;
-  }
-
-  async exists(email: UserEmail): Promise<boolean> {
-    const count = await this.repository.count({
-      where: { email: email.value },
-    });
-    return count > 0;
   }
 
   async changeName(user: User): Promise<User> {

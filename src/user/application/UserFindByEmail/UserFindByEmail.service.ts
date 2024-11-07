@@ -1,5 +1,5 @@
+import { UserRepository } from 'src/user/domain/contract/user.repository';
 import { User } from 'src/user/domain/entities/User';
-import { UserRepository } from 'src/user/domain/repositories/user.repository';
 import { UserEmail } from 'src/user/domain/value-objects';
 
 export class UserFindByEmail {

@@ -6,8 +6,8 @@ import { TaskDelete } from './application/TaskDelete/TaskDelete.service';
 import { TaskEdit } from './application/TaskEdit/TaskEdit.service';
 import { TaskFindById } from './application/TaskFindById/TaskFindById.service';
 import { TaskFindByUser } from './application/TaskFindByUser/TaskFindByUser.service';
+import { TypeOrmTaskRepository } from './infrastructure/DataBase/TypeOrmTask.repository';
 import { TaskController } from './infrastructure/http/controllers/task.controller';
-import { TypeOrmTaskRepository } from './infrastructure/persistence/DataBase/TypeOrmTask.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmTaskEntity])],

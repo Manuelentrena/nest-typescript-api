@@ -1,5 +1,5 @@
-import { User } from '../../../user/domain/entities/User';
-import { UserId } from '../../../user/domain/value-objects/UserId';
+import { User } from 'src/user/domain/entities/User';
+import { UserId } from 'src/user/domain/value-objects/UserId';
 
 export interface AuthRepository {
   register(user: User): Promise<User | null>;

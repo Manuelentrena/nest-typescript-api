@@ -1,4 +1,4 @@
-import { AuthRepository } from 'src/auth/domain/repositories/AuthRepository';
+import { AuthRepository } from 'src/auth/domain/contract/AuthRepository';
 import { UserId } from 'src/user/domain/value-objects';
 
 export class AuthLogout {

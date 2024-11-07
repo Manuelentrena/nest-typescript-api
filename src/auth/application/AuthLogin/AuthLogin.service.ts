@@ -1,4 +1,4 @@
-import { AuthRepository } from 'src/auth/domain/repositories/AuthRepository';
+import { AuthRepository } from 'src/auth/domain/contract/AuthRepository';
 import { UserFindByEmail } from 'src/user/application/UserFindByEmail/UserFindByEmail.service';
 import { User } from 'src/user/domain/entities/User';
 import { UserNotFoundError } from 'src/user/domain/errors/UserNotFoundError';

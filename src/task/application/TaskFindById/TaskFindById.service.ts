@@ -1,6 +1,6 @@
+import { TaskRepository } from '../../domain/contract/TaskRepository';
 import { Task } from '../../domain/entities/Task';
 import { TaskNotFoundError } from '../../domain/errors/TaskNotFoundError';
-import { TaskRepository } from '../../domain/repositories/TaskRepository';
 import { TaskId } from '../../domain/value-objects';
 
 export class TaskFindById {

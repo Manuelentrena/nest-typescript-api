@@ -3,8 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmUserEntity } from '../shared/database/TypeOrmUser.entity';
 import { UserFindByEmail } from './application/UserFindByEmail/UserFindByEmail.service';
 
+import { TypeOrmUserRepository } from 'src/user/infrastructure/database/TypeOrmUser.repository';
 import { UserController } from 'src/user/infrastructure/http/controllers/user.controller';
-import { TypeOrmUserRepository } from 'src/user/infrastructure/persistence/database/TypeOrmUser.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmUserEntity])],

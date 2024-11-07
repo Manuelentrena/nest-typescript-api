@@ -1,4 +1,4 @@
-import { AuthRepository } from 'src/auth/domain/repositories/AuthRepository';
+import { AuthRepository } from 'src/auth/domain/contract/AuthRepository';
 import { User } from 'src/user/domain/entities/User';
 import {
   UserEmail,

@@ -1,6 +1,6 @@
 import { UserId } from 'src/user/domain/value-objects';
+import { TaskRepository } from '../../domain/contract/TaskRepository';
 import { Task } from '../../domain/entities/Task';
-import { TaskRepository } from '../../domain/repositories/TaskRepository';
 
 export class TaskFindByUser {
   constructor(private repository: TaskRepository) {}
