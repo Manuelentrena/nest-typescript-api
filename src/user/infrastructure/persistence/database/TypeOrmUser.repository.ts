@@ -17,7 +17,7 @@ export class TypeOrmUserRepository implements UserRepository {
     return new User(
       new UserId(user.id),
       new UserName(user.username),
-      await UserPassword.create(user.password, true),
+      new UserPassword(user.password),
       new UserEmail(user.email),
     );
   }
@@ -39,8 +39,10 @@ export class TypeOrmUserRepository implements UserRepository {
     return user ? this.mapToDomain(user) : null;
   }
 
-  async exists(id: UserId): Promise<boolean> {
-    const count = await this.repository.count({ where: { id: id.value } });
+  async exists(email: UserEmail): Promise<boolean> {
+    const count = await this.repository.count({
+      where: { email: email.value },
+    });
     return count > 0;
   }
 
@@ -49,7 +51,11 @@ export class TypeOrmUserRepository implements UserRepository {
       username: user.username.value,
     });
 
-    return user;
+    const updatedUser = await this.repository.findOne({
+      where: { id: user.id.value },
+    });
+
+    return updatedUser ? this.mapToDomain(updatedUser) : null;
   }
 
   async delete(id: UserId): Promise<void> {
