@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmUserEntity } from '../shared/database/TypeOrmUser.entity';
-import { UserExists } from './application/UserExists/UserExists.service';
+import { UserFindByEmail } from './application/UserFindByEmail/UserFindByEmail.service';
 
 import { UserController } from 'src/user/infrastructure/http/controllers/user.controller';
 import { TypeOrmUserRepository } from 'src/user/infrastructure/persistence/database/TypeOrmUser.repository';
@@ -15,12 +15,12 @@ import { TypeOrmUserRepository } from 'src/user/infrastructure/persistence/datab
       useClass: TypeOrmUserRepository,
     },
     {
-      provide: 'UserExists',
+      provide: 'UserFindByEmail',
       useFactory: (repository: TypeOrmUserRepository) =>
-        new UserExists(repository),
+        new UserFindByEmail(repository),
       inject: ['UserRepository'],
     },
   ],
-  exports: ['UserExists'],
+  exports: ['UserFindByEmail'],
 })
 export class UserModule {}

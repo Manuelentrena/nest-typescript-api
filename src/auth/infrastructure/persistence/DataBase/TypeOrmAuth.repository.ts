@@ -2,7 +2,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AuthRepository } from 'src/auth/domain/repositories/AuthRepository';
 import { TypeOrmUserEntity } from 'src/shared/database/TypeOrmUser.entity';
 import { User } from 'src/user/domain/entities/User';
-import { UserNotFoundError } from 'src/user/domain/errors/UserNotFoundError';
 import { UserPasswordInvalidError } from 'src/user/domain/errors/UserPasswordInvalidError';
 import {
   UserEmail,
@@ -33,28 +32,14 @@ export class TypeOrmAuthRepository implements AuthRepository {
     );
   }
 
-  async login(useremail: UserEmail, password: string): Promise<User | null> {
-    const user = await this.repository.findOne({
-      where: { email: useremail.value },
-    });
+  async login(user: User, password: string): Promise<User | null> {
+    const isPasswordCorrect = await user.password.comparePassword(password);
 
-    if (!user)
-      throw new UserNotFoundError(
-        `User with email ${useremail.value} not found`,
-      );
+    if (!isPasswordCorrect) {
+      throw new UserPasswordInvalidError(`User password invalid`);
+    }
 
-    const storedPassword = UserPassword.fromHashed(user.password);
-    const isMatch = await storedPassword.comparePassword(password);
-
-    console.log({ isMatch });
-    if (!isMatch) throw new UserPasswordInvalidError(`User password invalid`);
-
-    return new User(
-      new UserId(user.id),
-      new UserName(user.username),
-      await UserPassword.create(user.password, true),
-      new UserEmail(user.email),
-    );
+    return user;
   }
 
   async findById(id: UserId): Promise<User | null> {
@@ -72,7 +57,6 @@ export class TypeOrmAuthRepository implements AuthRepository {
     userId: UserId,
     newPassword: string,
   ): Promise<User | null> {
-    console.log(new UserPassword(newPassword).hashedValue);
     await this.repository.update(userId.value, {
       password: (await UserPassword.create(newPassword, true)).hashedValue,
     });

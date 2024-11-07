@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserFindByEmail } from 'src/user/application/UserFindByEmail/UserFindByEmail.service';
+import { UserModule } from 'src/user/user.module';
 import { TypeOrmUserEntity } from '../shared/database/TypeOrmUser.entity';
 import { AuthLogin } from './application/AuthLogin/AuthLogin';
 import { AuthLogout } from './application/AuthLogout/AuthLogout';
@@ -9,7 +11,7 @@ import { AuthController } from './infrastructure/http/controllers/auth.controlle
 import { TypeOrmAuthRepository } from './infrastructure/persistence/DataBase/TypeOrmAuth.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TypeOrmUserEntity])],
+  imports: [TypeOrmModule.forFeature([TypeOrmUserEntity]), UserModule],
   controllers: [AuthController],
   providers: [
     {
@@ -24,9 +26,11 @@ import { TypeOrmAuthRepository } from './infrastructure/persistence/DataBase/Typ
     },
     {
       provide: 'AuthLogin',
-      useFactory: (repository: TypeOrmAuthRepository) =>
-        new AuthLogin(repository),
-      inject: ['AuthRepository'],
+      useFactory: (
+        repository: TypeOrmAuthRepository,
+        userFindByEmail: UserFindByEmail,
+      ) => new AuthLogin(repository, userFindByEmail),
+      inject: ['AuthRepository', 'UserFindByEmail'],
     },
     {
       provide: 'AuthResetPassword',

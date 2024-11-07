@@ -1,11 +1,19 @@
 import { AuthRepository } from 'src/auth/domain/repositories/AuthRepository';
+import { UserFindByEmail } from 'src/user/application/UserFindByEmail/UserFindByEmail.service';
 import { User } from 'src/user/domain/entities/User';
-import { UserEmail } from 'src/user/domain/value-objects';
+import { UserNotFoundError } from 'src/user/domain/errors/UserNotFoundError';
 
 export class AuthLogin {
-  constructor(private readonly repository: AuthRepository) {}
+  constructor(
+    private readonly repository: AuthRepository,
+    private readonly userFindByEmail: UserFindByEmail,
+  ) {}
 
-  async run(useremail: string, password: string): Promise<User | null> {
-    return this.repository.login(new UserEmail(useremail), password);
+  async run(email: string, password: string): Promise<User | null> {
+    const user = await this.userFindByEmail.run(email);
+    if (!user) {
+      throw new UserNotFoundError('User not found');
+    }
+    return this.repository.login(user, password);
   }
 }
