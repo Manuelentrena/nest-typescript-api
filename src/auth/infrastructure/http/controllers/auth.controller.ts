@@ -66,26 +66,6 @@ export class AuthController {
       .json(`User was logout: ${await this.authLogout.run(params.id)}`);
   }
 
-  // @Get('/:id')
-  // @UsePipes(new ValidationPipe({ transform: true }))
-  // async findById(@Param() params: FindOneUserParams, @Res() res: Response) {
-  //   return res
-  //     .status(200)
-  //     .json((await this.userFindById.run(params.id)).toPlainObject());
-  // }
-
-  // @Get('/user/:id/tasks')
-  // async getAllTasksByUser(
-  //   @Param() params: FindOneUserParams,
-  //   @Res() res: Response,
-  // ) {
-  //   return res.status(200).json({
-  //     tasks: (await this.taskGetAllByUserId.run(params.id)).map((task) =>
-  //       task.toPlainObject(),
-  //     ),
-  //   });
-  // }
-
   @Patch('/reset-password/:id')
   @UsePipes(new ValidationPipe({ transform: true }))
   async resetPassword(
