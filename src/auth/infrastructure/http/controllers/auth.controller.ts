@@ -10,14 +10,14 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { AuthLogin } from '../../../application/AuthLogin/AuthLogin.service';
-import { AuthLogout } from '../../../application/AuthLogout/AuthLogout.service';
-import { AuthRegister } from '../../../application/AuthRegister/AuthRegister.service';
-import { AuthResetPassword } from '../../../application/AuthResetPassword/AuthResetPassword.service';
-import { AuthLoginDto } from '../dto/login-auth.dto';
-import { AuthRegisterDto } from '../dto/register-auth.dto';
-import { AuthResetPasswordDto } from '../dto/reset-password-auth.dto';
-import { FindOneUserParams } from '../pipe/uuid-user.pipe';
+import { AuthLogin } from 'src/auth/application/AuthLogin/AuthLogin.service';
+import { AuthLogout } from 'src/auth/application/AuthLogout/AuthLogout.service';
+import { AuthRegister } from 'src/auth/application/AuthRegister/AuthRegister.service';
+import { AuthResetPassword } from 'src/auth/application/AuthResetPassword/AuthResetPassword.service';
+import { AuthLoginDto } from 'src/auth/infrastructure/http/dto/login-auth.dto';
+import { AuthRegisterDto } from 'src/auth/infrastructure/http/dto/register-auth.dto';
+import { AuthResetPasswordDto } from 'src/auth/infrastructure/http/dto/reset-password-auth.dto';
+import { FindOneUserParams } from 'src/auth/infrastructure/http/param/uuid-user.param';
 
 @Controller('/auth')
 export class AuthController {

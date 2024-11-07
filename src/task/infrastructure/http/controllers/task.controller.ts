@@ -12,14 +12,14 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { TaskCreate } from '../../../application/TaskCreate/TaskCreate.service';
-import { TaskDelete } from '../../../application/TaskDelete/TaskDelete.service';
-import { TaskEdit } from '../../../application/TaskEdit/TaskEdit.service';
-import { TaskFindById } from '../../../application/TaskFindById/TaskFindById.service';
-import { TaskFindByUser } from '../../../application/TaskFindByUser/TaskFindByUser.service';
-import { CreateTaskDto } from '../dto/create-task.dto';
-import { UpdateTaskDto } from '../dto/update-task.dto';
-import { FindOneTaskParams } from '../pipe/uuid-task.pipe';
+import { TaskCreate } from 'src/task/application/TaskCreate/TaskCreate.service';
+import { TaskDelete } from 'src/task/application/TaskDelete/TaskDelete.service';
+import { TaskEdit } from 'src/task/application/TaskEdit/TaskEdit.service';
+import { TaskFindById } from 'src/task/application/TaskFindById/TaskFindById.service';
+import { TaskFindByUser } from 'src/task/application/TaskFindByUser/TaskFindByUser.service';
+import { CreateTaskDto } from 'src/task/infrastructure/http/dto/create-task.dto';
+import { UpdateTaskDto } from 'src/task/infrastructure/http/dto/update-task.dto';
+import { FindOneTaskParams } from 'src/task/infrastructure/http/param/uuid-task.param';
 
 @Controller('/tasks')
 export class TaskController {
