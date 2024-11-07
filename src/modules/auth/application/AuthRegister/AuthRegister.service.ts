@@ -1,0 +1,27 @@
+import { AuthRepository } from 'src/modules/auth/domain/contract/AuthRepository';
+import { User } from 'src/modules/user/domain/entities/User';
+import {
+  UserEmail,
+  UserName,
+  UserPassword,
+} from 'src/modules/user/domain/value-objects';
+import { UserId } from 'src/modules/user/domain/value-objects/UserId';
+
+export class AuthRegister {
+  constructor(private readonly repository: AuthRepository) {}
+
+  async run(
+    id: string,
+    username: string,
+    password: string,
+    email: string,
+  ): Promise<User | null> {
+    const user = new User(
+      new UserId(id),
+      new UserName(username),
+      await UserPassword.create(password, true),
+      new UserEmail(email),
+    );
+    return this.repository.register(user);
+  }
+}
