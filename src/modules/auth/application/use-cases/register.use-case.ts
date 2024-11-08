@@ -1,3 +1,4 @@
+import { AuthRegisterDto } from 'src/modules/auth/application/dto/register-auth.dto';
 import { AuthRepository } from 'src/modules/auth/domain/contract/AuthRepository';
 import { User } from 'src/modules/user/domain/entities/User';
 import {
@@ -10,17 +11,12 @@ import { UserId } from 'src/modules/user/domain/value-objects/UserId';
 export class AuthRegister {
   constructor(private readonly repository: AuthRepository) {}
 
-  async run(
-    id: string,
-    username: string,
-    password: string,
-    email: string,
-  ): Promise<User | null> {
+  async run(register: AuthRegisterDto): Promise<User | null> {
     const user = new User(
-      new UserId(id),
-      new UserName(username),
-      await UserPassword.create(password, true),
-      new UserEmail(email),
+      new UserId(register.id),
+      new UserName(register.username),
+      await UserPassword.create(register.password, true),
+      new UserEmail(register.email),
     );
     return this.repository.register(user);
   }

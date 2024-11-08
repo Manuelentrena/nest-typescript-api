@@ -1,4 +1,5 @@
 import { UserEmail, UserId, UserName, UserPassword } from '../value-objects';
+import { UserPlainObject } from './User.plain-object';
 
 export class User {
   id: UserId;
@@ -18,7 +19,7 @@ export class User {
     this.email = email;
   }
 
-  public toPlainObject() {
+  public toPlainObject(): UserPlainObject {
     return {
       id: this.id.value,
       username: this.username.value,

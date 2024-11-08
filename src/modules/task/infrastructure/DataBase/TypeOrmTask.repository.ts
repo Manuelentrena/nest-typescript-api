@@ -60,15 +60,23 @@ export class TypeOrmTaskRepository implements TaskRepository {
     await this.repository.update(task.id.value, {
       name: task.name.value,
       date: task.date.value,
-      createdAt: task.createdAt.value,
       userId: task.userId.value,
     });
 
-    return task;
+    const updatedTask = await this.repository.findOne({
+      where: { id: task.id.value },
+    });
+
+    return updatedTask ? this.mapToDomain(updatedTask) : null;
   }
 
   async delete(id: TaskId): Promise<Task | null> {
     await this.repository.delete(id.value);
-    return null;
+
+    const deletedTask = await this.repository.findOne({
+      where: { id: id.value },
+    });
+
+    return deletedTask ? this.mapToDomain(deletedTask) : null;
   }
 }

@@ -5,8 +5,8 @@ import { UserEmail } from 'src/modules/user/domain/value-objects';
 export class UserFindByEmail {
   constructor(private readonly repository: UserRepository) {}
 
-  async run(userEmail: string): Promise<User | null> {
-    const user = await this.repository.findByEmail(new UserEmail(userEmail));
+  async run(email: string): Promise<User | null> {
+    const user = await this.repository.findByEmail(new UserEmail(email));
     return user || null;
   }
 }

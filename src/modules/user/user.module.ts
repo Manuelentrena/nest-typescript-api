@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmUserEntity } from '../shared/database/TypeOrmUser.entity';
-import { UserFindByEmail } from './application/UserFindByEmail/UserFindByEmail.service';
+import { UserFindByEmail } from './application/uses-cases/userFindByEmail.use-case';
 
+import { UserController } from 'src/modules/user/infrastructure/controllers/user.controller';
 import { TypeOrmUserRepository } from 'src/modules/user/infrastructure/database/TypeOrmUser.repository';
-import { UserController } from 'src/modules/user/infrastructure/http/controllers/user.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmUserEntity])],

@@ -7,23 +7,18 @@ import {
   TaskId,
   TaskName,
 } from '../../domain/value-objects';
+import { CreateTaskDto } from '../dto/create-task.dto';
 
 export class TaskCreate {
   constructor(private repository: TaskRepository) {}
 
-  async run(
-    id: string,
-    name: string,
-    date: Date,
-    createdAt: Date,
-    userId: string,
-  ): Promise<Task | null> {
+  async run(newTask: CreateTaskDto): Promise<Task | null> {
     const task = new Task(
-      new TaskId(id),
-      new TaskName(name),
-      new TaskDate(date),
-      new TaskCreatedAt(createdAt),
-      new UserId(userId),
+      new TaskId(newTask.id),
+      new TaskName(newTask.name),
+      new TaskDate(newTask.date),
+      new TaskCreatedAt(new Date()),
+      new UserId(newTask.userId),
     );
 
     return this.repository.create(task);

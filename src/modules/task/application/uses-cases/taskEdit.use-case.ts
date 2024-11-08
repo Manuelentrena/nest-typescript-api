@@ -7,23 +7,21 @@ import {
   TaskName,
 } from 'src/modules/task/domain/value-objects';
 import { UserId } from 'src/modules/user/domain/value-objects';
+import { UpdateTaskDto } from '../dto/update-task.dto';
+import { FindOneTaskParams } from '../param/uuid-task.param';
 
 export class TaskEdit {
   constructor(private repository: TaskRepository) {}
 
   async run(
-    id: string,
-    name: string,
-    date: Date,
-    createdAt: Date,
-    userId: string,
+    updatedTask: UpdateTaskDto & FindOneTaskParams,
   ): Promise<Task | null> {
     const user = new Task(
-      new TaskId(id),
-      new TaskName(name),
-      new TaskDate(date),
-      new TaskCreatedAt(createdAt),
-      new UserId(userId),
+      new TaskId(updatedTask.id),
+      new TaskName(updatedTask.name),
+      new TaskDate(updatedTask.date),
+      new TaskCreatedAt(updatedTask.createdAt),
+      new UserId(updatedTask.userId),
     );
 
     return this.repository.edit(user);

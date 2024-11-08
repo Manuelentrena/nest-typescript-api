@@ -1,18 +1,20 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmTaskEntity } from 'src/modules/shared/database/TypeOrmTask.entity';
-import { TaskCreate } from 'src/modules/task/application/TaskCreate/TaskCreate.service';
-import { TaskDelete } from 'src/modules/task/application/TaskDelete/TaskDelete.service';
-import { TaskEdit } from 'src/modules/task/application/TaskEdit/TaskEdit.service';
-import { TaskFindById } from 'src/modules/task/application/TaskFindById/TaskFindById.service';
-import { TaskFindByUser } from 'src/modules/task/application/TaskFindByUser/TaskFindByUser.service';
+import { TaskService } from 'src/modules/task/application/services/task.service';
+import { TaskCreate } from 'src/modules/task/application/uses-cases/taskCreate.use-case';
+import { TaskDelete } from 'src/modules/task/application/uses-cases/taskDelete.use-case';
+import { TaskEdit } from 'src/modules/task/application/uses-cases/taskEdit.use-case';
+import { TaskFindById } from 'src/modules/task/application/uses-cases/taskFindById.use-case';
+import { TaskFindByUser } from 'src/modules/task/application/uses-cases/taskFindByUser.use-case';
 import { TypeOrmTaskRepository } from 'src/modules/task/infrastructure/DataBase/TypeOrmTask.repository';
-import { TaskController } from 'src/modules/task/infrastructure/http/controllers/task.controller';
+import { TaskController } from 'src/modules/task/infrastructure/controllers/task.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmTaskEntity])],
   controllers: [TaskController],
   providers: [
+    TaskService,
     {
       provide: 'TaskRepository',
       useClass: TypeOrmTaskRepository,

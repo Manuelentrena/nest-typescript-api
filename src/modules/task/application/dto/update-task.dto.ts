@@ -15,6 +15,9 @@ export class UpdateTaskDto {
   @IsDateString()
   date: Date;
 
+  @IsDateString()
+  createdAt: Date;
+
   @IsUUID()
   userId: string;
 }
