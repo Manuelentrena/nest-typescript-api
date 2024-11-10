@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { envConfig } from 'src/config/env';
 import { AuthModule } from 'src/modules/auth/auth.module';
@@ -7,6 +8,7 @@ import { UserModule } from 'src/modules/user/user.module';
 
 @Module({
   imports: [
+    EventEmitterModule.forRoot(),
     TypeOrmModule.forRoot({
       type: envConfig.DB_TYPE as 'postgres',
       host: envConfig.DB_HOST,
