@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { AuthLoginDto } from 'src/modules/auth/application/dto/login-auth.dto';
 import { AuthLogoutDto } from 'src/modules/auth/application/dto/logout-auth.dto';
 import { AuthRegisterDto } from 'src/modules/auth/application/dto/register-auth.dto';
@@ -8,6 +9,7 @@ import { AuthLogin } from 'src/modules/auth/application/use-cases/login.use-case
 import { AuthLogout } from 'src/modules/auth/application/use-cases/logout.use-case';
 import { AuthRegister } from 'src/modules/auth/application/use-cases/register.use-case';
 import { AuthResetPassword } from 'src/modules/auth/application/use-cases/reset-password.use-case';
+import { UserRegisterEvent } from 'src/modules/auth/domain/events/user-register.event';
 import { UserFindByEmail } from 'src/modules/user/application/uses-cases/userFindByEmail.use-case';
 import { UserPlainObject } from 'src/modules/user/domain/entities/User.plain-object';
 import { UserNotFoundError } from 'src/modules/user/domain/errors/UserNotFound.error';
@@ -24,10 +26,16 @@ export class AuthService {
     private readonly authResetPassword: AuthResetPassword,
     @Inject('UserFindByEmail')
     private readonly userFindByEmail: UserFindByEmail,
+    private eventEmitter: EventEmitter2,
   ) {}
 
   async register(register: AuthRegisterDto): Promise<UserPlainObject> {
     const user = await this.authRegister.run(register);
+
+    this.eventEmitter.emit(
+      'user.register',
+      new UserRegisterEvent(user.id.value),
+    );
     return user.toPlainObject();
   }
 
