@@ -1,11 +1,11 @@
-// import { User } from 'src/auth/domain/entities/User';
-// import { UserId } from 'src/auth/domain/value-objects';
-// import { UserRepository } from '../../../auth/domain/repositories/UserRepository';
+import { UserRepository } from 'src/modules/user/domain/contract/user.repository';
+import { User } from 'src/modules/user/domain/entities/User';
+import { UserId } from 'src/modules/user/domain/value-objects/UserId';
 
-// export class UserFindById {
-//   constructor(private readonly repository: UserRepository) {}
+export class UserFindById {
+  constructor(private readonly repository: UserRepository) {}
 
-//   async run(userId: string): Promise<User | null> {
-//     return this.repository.findById(new UserId(userId));
-//   }
-// }
+  async run(userId: string): Promise<User | null> {
+    return this.repository.findById(new UserId(userId));
+  }
+}
