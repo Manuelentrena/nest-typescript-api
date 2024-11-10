@@ -5,3 +5,5 @@ export type TaskPlainObject = {
   createdAt: Date;
   userId: string;
 };
+
+export type TaskPlainObjectWithoutUserId = Omit<TaskPlainObject, 'userId'>;

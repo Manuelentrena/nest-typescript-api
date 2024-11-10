@@ -1,17 +1,26 @@
-import { Controller } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Res,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import { Response } from 'express';
+import { FindOneUserParams } from 'src/modules/user/application/param/uuid-user.param';
+import { UserService } from 'src/modules/user/application/services/user.service';
 
 @Controller('/users')
+@UsePipes(new ValidationPipe({ transform: true }))
 export class UserController {
-  //   constructor(@Inject('UserTasks') private readonly userTasks: UserTasks) {}
-  //   @Get(':id/tasks')
-  //   async getAllTasksByUser(
-  //     @Param() params: FindOneUserParams,
-  //     @Res() res: Response,
-  //   ) {
-  //     return res.status(200).json({
-  //       tasks: (await this.userTasks.run(params.id)).map((task) =>
-  //         task.toPlainObject(),
-  //       ),
-  //     });
-  //   }
+  constructor(private readonly userService: UserService) {}
+
+  @Get(':id/tasks')
+  async findUserWithTasks(
+    @Param() params: FindOneUserParams,
+    @Res() res: Response,
+  ) {
+    const userWithTasks = await this.userService.findUserWithTasks(params);
+    return res.status(200).json(userWithTasks);
+  }
 }
