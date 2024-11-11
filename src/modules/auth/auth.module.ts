@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { envConfig } from 'src/config/env';
 import { AuthService } from 'src/modules/auth/application/services/auth.service';
 import { EmailService } from 'src/modules/auth/application/services/email.service';
 import { AuthLogin } from 'src/modules/auth/application/use-cases/login.use-case';
@@ -12,6 +13,7 @@ import { ResendEmailRepository } from 'src/modules/auth/infrastructure/Mailer/Re
 import { AuthController } from 'src/modules/auth/infrastructure/controllers/auth.controller';
 import { TypeOrmUserEntity } from 'src/modules/shared/database/TypeOrmUser.entity';
 import { UserModule } from 'src/modules/user/user.module';
+import { MockEmailRepository } from './infrastructure/Mailer/MockEmail.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmUserEntity]), UserModule],
@@ -25,7 +27,10 @@ import { UserModule } from 'src/modules/user/user.module';
     },
     {
       provide: 'EmailRepository',
-      useClass: ResendEmailRepository,
+      useClass:
+        envConfig.NODE_ENV === 'development'
+          ? MockEmailRepository
+          : ResendEmailRepository,
     },
     {
       provide: 'AuthRegister',
